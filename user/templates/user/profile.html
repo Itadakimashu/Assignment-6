@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<h2 class="text-center mt-3 mb-4">Borrowed Books</h2>
+<table class="table table-striped text-center">
+    <thead>
+      <tr>
+        <th scope="col">Borrow ID</th>
+        <th scope="col">Book</th>
+        <th scope="col">Borrow Price</th>
+        <th scope="col">Balance After</th>
+        <th scope="col">Borrowed Date</th>
+        <th scope="col">Return</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for borrow in borrows %}
+        <tr>
+        <th scope="row">{{borrow.id}}</th>
+        <td>{{borrow.book.title}}</td>
+        <td>{{borrow.amount}}$</td>
+        <td>{{borrow.balance_after}}$</td>
+        <td>{{borrow.borrow_date}}</td>
+        {% if borrow.returned %}
+        <td><button class="btn btn-success disabled">Returned</button></td>
+        {% else %}
+        <td><a href="{% url 'return_book' borrow.id %}" class="btn btn-danger">Return</a></td>
+        {% endif %}
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock content %}

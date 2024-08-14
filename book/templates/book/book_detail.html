@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{book.title}}{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-4 text-center">
+            <img src="{{book.image.url}}" alt="Book Cover"><br>
+            <a href="{% url 'borrow_book' book.id %}" class="btn btn-danger mt-3">Borrow book</a>
+        </div>
+        <div class="col-8">
+            <h2>{{book.title}}</h2><br>
+            <p><b>Description:</b> {{book.description}}</p>
+            <p>Borrow Price: <span class="text-danger">{{book.price}}$</span></p>
+            <p>Categories:
+                {% for category in book.category.all %}<span class="btn btn-primary disabled mx-1">{{category}}</span>{% endfor %}
+              </p>
+            
+        </div>
+    </div>
+</div><hr>
+
+<div class="container">
+    <div class="row mt-4 mb-4">
+        <div class="col-7">
+            <h2 class="text-center">Add Review</h2>
+            {% if borrowed %}
+            <form method="post">
+                {% csrf_token %}
+                {{form | crispy}}
+                <button type="submit" class="btn btn-warning">Submit</button>
+              </form>
+            {% else %}
+            <h4 class="text-center text-light mt-5 p-3 rounded" style="background-color: #d9534f;">
+                <i class="bi bi-exclamation-circle-fill"></i> 
+                Only the user who borrowed the book can review. Thank you.
+            </h4>
+            {% endif %}
+        </div>
+        
+        
+        <div class="col-5">
+          <h2 class="text-center">{{reviews | length}} Reviews</h2>
+          {%for review in reviews %}
+          <div class="card m-2">
+            <div class="card-body">
+              <h5 class="card-title">{{review.user.email}}</h5>
+              <p class="card-text fs-6 text-secondary">{{review.rating}}⭐ - on {{review.created_on}}</p>
+              <p class="card-text">{{review.review}}</p>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

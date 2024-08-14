@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row mt-5 mb-5">
+    <div class="col-2 bg-body-tertiary p-3" style="height: 80vh; border-radius: 10px;">
+        <div class="d-flex flex-column">
+            <h3 class="mb-4 text-center">Categories</h3>
+            <ul class="list-group list-group-flush">
+                {% for category in categories %}
+                <li class="list-group-item">
+                    <a href="{% url 'category_wise_view' category.id %}" class="text-decoration-none text-dark">
+                        {{ category.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-10">
+        <div class="row">
+            {% for book in books %}
+            <div class="col-4 g-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{book.image.url}}" class="card-img-top" height="300px" alt="Book image">
+                    <div class="card-body">
+                        <a href="{% url 'book_detail' book.id %}" class="text-decoration-none"><h5 class="card-title">{{book.title}}</h5></a>
+                      <p class="card-text">{{book.description | truncatewords:9}}</p>
+                      <p class="card-text">Borrow Price: <span class="text-danger">{{book.price}}$</span></p>
+                      <p>Categories:
+                        {% for category in book.category.all %}<span class="btn btn-primary disabled mx-1">{{category}}</span>{% endfor %}
+                      </p>
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+</div>
+
+
+{% endblock content %}
