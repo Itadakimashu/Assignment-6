@@ -31,7 +31,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"] # this is necessary 
-CSRF_TRUSTED_ORIGINS = ['https://book-management-cvlf.onrender.com/','https://*.127.0.0.1'] # first part will be your deploy project’s domain name
+CSRF_TRUSTED_ORIGINS = ['https://book-management-cvlf.onrender.com','https://*.127.0.0.1'] # first part will be your deploy project’s domain name
 # Application definition
 
 INSTALLED_APPS = [
