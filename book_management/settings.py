@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'book_management.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://book_management_c1ea_user:DPjEgsZQ0N3bPtt60YrjBIrR4TmUNT7Q@dpg-cqu5v1jv2p9s73d1drd0-a/book_management_c1ea',
+        default='postgresql://book_management_c1ea_user:DPjEgsZQ0N3bPtt60YrjBIrR4TmUNT7Q@dpg-cqu5v1jv2p9s73d1drd0-a.oregon-postgres.render.com/book_management_c1ea',
     )
 }
 
